@@ -4,34 +4,81 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var MagpieRouter = require('./routes/Magpie');
-var addmodsRouter = require('./routes/addmods');
-var selectorRouter = require('./routes/selector');
 
+const connectionString =  process.env.MONGO_CON 
+mongoose = require('mongoose'); 
+mongoose.connect(connectionString,{useNewUrlParser: true, useUnifiedTopology: true}); 
+//Get the default connection 
+var db = mongoose.connection; 
+ 
+//Bind connection to error event  
+db.on('error', console.error.bind(console, 'MongoDB connection error:')); 
+
+
+db.once("open", function(){ 
+ console.log("Connection to DB succeeded")}); 
+
+
+ var indexRouter = require('./routes/index');
+ var usersRouter = require('./routes/users');
+ var magpieRouter = require('./routes/magpie');
+ var addmodsRouter = require('./routes/addmods');
+ var selectorRouter = require('./routes/selector');
+ var magpie = require("./models/magpie"); 
+ var resourceRouter = require('./routes/resource');
+ 
+
+
+// We can seed the collection if needed on server start 
+async function recreateDB(){ 
+  // Delete everything 
+  await magpie.deleteMany(); 
+ 
+  let instance1 = new magpie({name:"Nikhil",  color:"Green", weight:35}); 
+  instance1.save( function(err,doc) { 
+      if(err) return console.error(err); 
+      console.log("First object saved") 
+  }); 
+
+ 
+ 
+  let instance2 = new magpie({name :"sai",  color:"black", weight:28}); 
+  instance2.save( function(err,doc) { 
+      if(err) return console.error(err); 
+      console.log("second object saved") 
+  }); 
+ 
+ 
+ 
+  let instance3 = new magpie({name:"prathik",  color:"white", weight:45}); 
+  instance3.save( function(err,doc) { 
+      if(err) return console.error(err); 
+      console.log("third object saved") 
+  }); 
+} 
+ 
+let reseed = true; 
+if (reseed) { recreateDB();} 
+ 
 var app = express();
+ 
+ // view engine setup
+ app.set('views', path.join(__dirname, 'views'));
+ app.set('view engine', 'pug');
+ 
+ app.use(logger('dev'));
+ app.use(express.json());
+ app.use(express.urlencoded({ extended: false }));
+ app.use(cookieParser());
+ app.use(express.static(path.join(__dirname, 'public')));
+ 
+ app.use('/', indexRouter);
+ app.use('/users', usersRouter);
+ app.use('/magpie', magpieRouter);
+ app.use('/addmods', addmodsRouter);
+ app.use('/selector', selectorRouter);
+ app.use('/resource', resourceRouter);
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/Magpie', MagpieRouter);
-app.use('/addmods', addmodsRouter);
-app.use('/selector', selectorRouter);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
 
 // error handler
 app.use(function(err, req, res, next) {

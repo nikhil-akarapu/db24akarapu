@@ -1,29 +1,14 @@
 extends layout
 
 block content
-  h1= title  
-  p 
-  div(class="container-fluid")
+  h1= title
+  
+  p Search results magpie   
+  p
+  - let items = results 
+    div(class="container-fluid")
         div(class="row")
-            -
-                let Magpie  = [
-                    {
-                        "name": "Nikhil",
-                        "color": "Green" ,
-                        "weight": 35
-                    },
-                    {
-                        "name": "sai",
-                        "color": "black" ,
-                        "weight": 28
-                    },
-                    {
-                        "name": "prathik",
-                        "color": "white" ,
-                        "weight": 45
-                    },                   
-                ]
-            each v,index in Magpie  
+            each v,index in items
                 div(class="col-sm-2" onclick=`buy(${index})`) #{v.name}
                 div(class="col-sm-2" onclick=`buy(${index})`) #{v.color}
                 div(class="col-sm-2" onclick=`buy(${index})`) #{v.weight}

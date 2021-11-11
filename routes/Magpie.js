@@ -1,9 +1,6 @@
 var express = require('express');
+const magpie_controlers= require('../controllers/magpie');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('Magpie', { title: 'search results for Magpie' });
-});
-
+router.get('/', magpie_controlers.magpie_view_all_Page );
 module.exports = router;
