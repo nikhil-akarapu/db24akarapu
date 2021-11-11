@@ -1,6 +1,6 @@
 var magpie = require('../models/magpie'); 
  
-// List of all magpies 
+// List of all magpie
 exports.magpie_list = async function(req, res) { 
     try{ 
         themagpie = await magpie.find(); 
@@ -18,8 +18,24 @@ exports.magpie_detail = function(req, res) {
 }; 
  
 // Handle magpie create on POST. 
-exports.magpie_create_post = function(req, res) { 
-    res.send('NOT IMPLEMENTED: magpie create POST'); 
+exports.magpie_create_post = async function(req, res) { 
+    console.log(req.body) 
+    let document = new magpie(); 
+    // We are looking for a body, since POST does not have query parameters. 
+    // Even though bodies can be in many different formats, we will be picky 
+    // and require that it be a json object 
+    // {"magpie_type":"goat", "cost":12, "size":"large"} 
+    document.name = req.body.name; 
+    document.color = req.body.color; 
+    document.weight = req.body.weight; 
+    try{ 
+        let result = await document.save(); 
+        res.send(result); 
+    } 
+    catch(err){ 
+        res.status(500); 
+        res.send(`{"error": ${err}}`); 
+    }   
 }; 
  
 // Handle magpie delete form on DELETE. 
