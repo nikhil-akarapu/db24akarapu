@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1= title
+
+    - let horseid = toShow._id
+    - let horseName = toShow.name
+    - let horseColor = toShow.color
+    - let horseWeight = toShow.weight
+    div
+      div.row
+        div(class='horseAttr mr-3') horse ID is:
+        div #{horseid}
+      div.row
+        div(class='horseAttr mr-3') horse Name is:
+        div #{horseName}
+      div.row
+        div(class='horseAttr mr-3') horse Color is:
+        div #{horseColor}
+      div.row
+        div(class='horseAttr mr-3') horse Weight is:
+        div #{horseWeight}
