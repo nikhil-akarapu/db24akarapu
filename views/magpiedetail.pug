@@ -4,7 +4,7 @@ block content
   h1= title
 
     - let magpieid = toShow._id
-    - let magpieName = toShow.name
+    - let magpiename = toShow.name
     - let magpiecolor = toShow.color
     - let magpieweight = toShow.weight
     div
@@ -13,7 +13,7 @@ block content
         div #{magpieid}
       div.row
         div(class='magpieAttr mr-3') magpie Name is:
-        div #{magpieName}
+        div #{magpiename}
       div.row
         div(class='magpieAttr mr-3') magpie Color is:
         div #{magpiecolor}

@@ -5,10 +5,10 @@ block content
   h2 No instance to delete
  else
   - let magpieid = toShow._id
-  - let magpieName = toShow.Name
-  - let magpiecost = toShow.cost
+  - let magpiename = toShow.name
+  - let magpiecolor = toShow.color
   - let magpieweight = toShow.weight
-  - let actionid = "/resource/resource/magpies/" + magpieid
+  - let actionid = "/resource/resource/magpie/" + magpieid
   script let actionid = "#{actionid}"
   div
     div.row
@@ -16,10 +16,10 @@ block content
       div #{magpieid}
     div.row
       div(class='magpieAttr mr-3') magpie Name is:
-      div #{magpieName}
+      div #{magpiename}
     div.row
-      div(class='magpieAttr mr-3') magpie Cost is:
-      div #{magpiecost}
+      div(class='magpieAttr mr-3') magpie Color is:
+      div #{magpiecolor}
     div.row
       div(class='magpieAttr mr-3') magpie Weight is:
       div #{magpieweight}
@@ -28,7 +28,7 @@ block content
   script.
    function cancel() {
    // Go back to the home page for the magpie collection
-   window.location.href='resource/resource/magpies'
+   window.location.href='resource/resource/magpie'
    }
   script.
    function deleteOnid() {
@@ -40,7 +40,7 @@ block content
     return resp.json(); // or resp.text() or whatever the server sends
     }).then((body) => {
     alert("Delete succeded")
-    window.location.href='resource/resource/magpies'
+    window.location.href='resource/resource/magpie'
     // TODO handle body
     }).catch((error) => {
     // TODO handle error
