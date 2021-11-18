@@ -28,6 +28,8 @@ db.once("open", function(){
  var resourceRouter = require('./routes/resource');
  var detailRouter = require('./routes/detail');
  var createRouter = require('./routes/create');
+ var magpieupdateRouter = require('./routes/update');
+ var magpiedeleteRouter = require('./routes/delete');
  
 
 
@@ -82,6 +84,8 @@ var app = express();
  app.use('/resource', resourceRouter);
  app.use('/detail', detailRouter);
  app.use('/create', createRouter);
+ app.use('/update', magpieupdateRouter);
+ app.use('/delete', magpiedeleteRouter);
 
 
 // error handler

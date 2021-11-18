@@ -59,13 +59,13 @@ exports.magpie_delete = async function(req, res) {
     } 
 };
 
-// Handle building the view for updating a costume. 
+// Handle building the view for updating a magpie. 
 // query provides the id 
-exports.costume_update_Page =  async function(req, res) { 
+exports.magpie_update_Page =  async function(req, res) { 
     console.log("update view for item "+req.query.id) 
     try{ 
-        let result = await Costume.findById(req.query.id) 
-        res.render('costumeupdate', { title: 'Costume Update', toShow: result }); 
+        let result = await magpie.findById(req.query.id) 
+        res.render('magpieupdate', { title: 'magpie Update', toShow: result }); 
     } 
     catch(err){ 
         res.status(500) 
@@ -86,6 +86,19 @@ exports.magpie_create_Page =  function(req, res) {
         res.send(`{'error': '${err}'}`); 
     } 
 }; 
+// Handle a delete one view with id from query 
+exports.magpie_delete_Page = async function(req, res) { 
+    console.log("Delete view for id "  + req.query.id) 
+    try{ 
+        result = await magpie.findById(req.query.id) 
+        res.render('magpiedelete', { title: 'magpie Delete', toShow: 
+result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+};
 
 // Handle a show one view with id specified by query 
 exports.magpie_view_one_Page = async function(req, res) { 

@@ -3,20 +3,20 @@ extends layout
 block content
   h1= title
 
-    - let horseid = toShow._id
-    - let horseName = toShow.name
-    - let horseColor = toShow.color
-    - let horseWeight = toShow.weight
+    - let magpieid = toShow._id
+    - let magpieName = toShow.name
+    - let magpiecolor = toShow.color
+    - let magpieweight = toShow.weight
     div
       div.row
-        div(class='horseAttr mr-3') horse ID is:
-        div #{horseid}
+        div(class='magpieAttr mr-3') magpie ID is:
+        div #{magpieid}
       div.row
-        div(class='horseAttr mr-3') horse Name is:
-        div #{horseName}
+        div(class='magpieAttr mr-3') magpie Name is:
+        div #{magpieName}
       div.row
-        div(class='horseAttr mr-3') horse Color is:
-        div #{horseColor}
+        div(class='magpieAttr mr-3') magpie Color is:
+        div #{magpiecolor}
       div.row
-        div(class='horseAttr mr-3') horse Weight is:
-        div #{horseWeight}
+        div(class='magpieAttr mr-3') magpie Weight is:
+        div #{magpieweight}

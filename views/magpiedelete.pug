@@ -1,0 +1,49 @@
+extends layout
+block content
+ h1= title
+ if (toShow == null)
+  h2 No instance to delete
+ else
+  - let magpieid = toShow._id
+  - let magpieName = toShow.Name
+  - let magpiecost = toShow.cost
+  - let magpieweight = toShow.weight
+  - let actionid = "/resource/resource/magpies/" + magpieid
+  script let actionid = "#{actionid}"
+  div
+    div.row
+      div(class='magpieAttr mr-3') magpie ID is:
+      div #{magpieid}
+    div.row
+      div(class='magpieAttr mr-3') magpie Name is:
+      div #{magpieName}
+    div.row
+      div(class='magpieAttr mr-3') magpie Cost is:
+      div #{magpiecost}
+    div.row
+      div(class='magpieAttr mr-3') magpie Weight is:
+      div #{magpieweight}
+  button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+  button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+  script.
+   function cancel() {
+   // Go back to the home page for the magpie collection
+   window.location.href='resource/resource/magpies'
+   }
+  script.
+   function deleteOnid() {
+    console.log("starting delete")
+    // delete first
+    fetch(actionid, {
+    method: 'DELETE' //Don't need a body for the delete
+    }).then((resp) => {
+    return resp.json(); // or resp.text() or whatever the server sends
+    }).then((body) => {
+    alert("Delete succeded")
+    window.location.href='resource/resource/magpies'
+    // TODO handle body
+    }).catch((error) => {
+    // TODO handle error
+    alert("Delete failed " + error )
+    });
+   }

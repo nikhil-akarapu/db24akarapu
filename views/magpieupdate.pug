@@ -1,0 +1,39 @@
+extends layout
+block content
+ h1(class="text-success")= title
+ - let magpieid = toShow._id
+ - let magpieName = toShow.Name
+ - let magpiecolor = toShow.color
+ - let magpieweight = toShow.weight
+ div.row(class='mb-2')
+   div.mr-1 ID is
+   div #{magpieid}
+ - let actionid = "/resource/resource/magpies/" + magpieid
+ form(id='magpieForm', action= actionid, method="PUT")
+  div.form-group
+   label.magpieAttr(for='Name') magpie Name 
+   input#magpie_type(type='String', name='Name', value= magpieName )
+  div.form-group
+    label.magpieAttr(for='color') magpie color
+    input#cost(type='String', name='colorr', value= magpieColor )
+  div.form-group
+    label.magpieAttr(for='weight') magpie Weight
+    input#weight(type='int', name='weight', value= magpieWeight )
+    input(type="submit" class="btn btn-primary btn-sm")
+ script.
+  document.forms['magpieForm'].addEventListener('submit', (event) => {
+   event.preventDefault();
+   // TODO do something here to show user that form is being submitted
+   fetch(event.target.action, {
+   method: 'PUT',
+   body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+   }).then((resp) => {
+   return resp.json(); // or resp.text() or whatever the server sends
+   }).then((body) => {
+   alert("Update succeded")
+   // TODO handle body
+   }).catch((error) => {
+   // TODO handle error
+   alert("Update failed " + error )
+   });
+  });
