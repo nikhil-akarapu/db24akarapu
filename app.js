@@ -27,6 +27,7 @@ db.once("open", function(){
  var magpie = require("./models/magpie"); 
  var resourceRouter = require('./routes/resource');
  var detailRouter = require('./routes/detail');
+ var createRouter = require('./routes/create');
  
 
 
@@ -80,6 +81,7 @@ var app = express();
  app.use('/selector', selectorRouter);
  app.use('/resource', resourceRouter);
  app.use('/detail', detailRouter);
+ app.use('/create', createRouter);
 
 
 // error handler

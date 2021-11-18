@@ -59,6 +59,20 @@ exports.magpie_delete = async function(req, res) {
     } 
 };
 
+// Handle building the view for creating a magpie. 
+// No body, no in path parameter, no query. 
+// Does not need to be async 
+exports.magpie_create_Page =  function(req, res) { 
+    console.log("create view") 
+    try{ 
+        res.render('magpiecreate', { title: 'magpie Create'}); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+
 // Handle a show one view with id specified by query 
 exports.magpie_view_one_Page = async function(req, res) { 
     console.log("single view for id "  + req.query.id) 
