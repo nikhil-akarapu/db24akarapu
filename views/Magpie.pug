@@ -6,12 +6,17 @@ block content
   p Search results magpie   
   p
   - let items = results 
-    div(class="container-fluid")
-        div(class="row")
-            each v,index in items
-                div(class="col-sm-2" onclick=`buy(${index})`) #{v.name}
-                div(class="col-sm-2" onclick=`buy(${index})`) #{v.color}
-                div(class="col-sm-2" onclick=`buy(${index})`) #{v.weight}
+    div(class="container-fluid") 
+    div(class="row m-1") 
+      each item in items  
+        - let destination = `dispatch(\"/magpie/update?id=${item._id}\")` 
+        div(class="row-sm-2", class="m-1") Item #{item.name}(#{item.color}) is #{item.weight} 
+          button.btn( class="btn-primary ml-1", onclick= destination) Update 
+   
+  script. 
+    function dispatch(path){ 
+      window.location.href=path 
+    } 
 
   script.                
         function buy(intemNo)
